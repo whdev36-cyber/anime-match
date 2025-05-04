@@ -63,3 +63,14 @@ class AnimeCharacter(db.Model):
     updated_at = db.Column(db.DateTime(timezone=True), default=func.now(), onupdate=func.now())
 
 
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
+@app.route('/')
+def demo():
+    return render('demo.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
